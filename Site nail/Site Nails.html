@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nail Designer Studio - Alongamento & Unhas em Gel</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ffeef8 0%, #fff0f5 100%);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        /* Container Responsivo */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 4%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 3%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 2%;
+            }
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 7rem 2rem 5rem;
+            scroll-margin-top: 100px;
+        }
+
+        @media (max-width: 992px) {
+            .section {
+                padding: 6rem 1.5rem 4rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 5rem 1rem 3rem;
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section {
+                padding: 4rem 1rem 2rem;
+            }
+        }
+
+        /* Hero Section with Carousel */
+        .hero {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            padding: 4rem 0;
+            text-align: center;
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 3rem 0;
+                border-radius: 0 0 30px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2rem 0;
+                border-radius: 0 0 20px 20px;
+            }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #ad1457;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 480px) {
+            .hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ad1457;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            .section-title::after {
+                width: 80px;
+                margin: 0.8rem auto;
+            }
+        }
+
+        /* Carousel */
+        .carousel-container {
+            position: relative;
+            max-width: 800px;
+            width: 90%;
+            margin: 2.5rem auto;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-container {
+                width: 95%;
+                margin: 2rem auto;
+            }
+            
+            .carousel-slide img {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .carousel-container {
+                width: 100%;
+                border-radius: 10px;
+            }
+            
+            .carousel-slide img {
+                height: 250px;
+            }
+            
+            .carousel-caption {
+                padding: 1rem;
+            }
+            
+            .carousel-caption h3 {
+                font-size: 1.1rem;
+            }
+            
+            .carousel-caption p {
+                font-size: 0.9rem;
+            }
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .carousel-caption h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.8);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #e91e63;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-nav:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        .carousel-dots {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ddd;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #e91e63;
+            transform: scale(1.2);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin: 3rem 0;
+            justify-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                gap: 2rem;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .service-card {
+                padding: 1.5rem;
+            }
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #e91e63;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #ad1457;
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 4rem 0;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 992px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+            
+            .about-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                gap: 2.5rem;
+                margin: 3rem 0;
+            }
+            
+            .about-image img {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .about-content {
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+            
+            .about-image img {
+                height: 280px;
+            }
+        }
+
+        .about-text {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+            justify-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                gap: 1.2rem;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
+            
+            .gallery-item img {
+                height: 200px;
+            }
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            max-width: 350px;
+            width: 100%;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(233, 30, 99, 0.8), rgba(173, 20, 87, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: #e91e63;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #e91e63, #ad1457);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #ad1457 0%, #7b1fa2 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+        }
+        .footer-section {
+            text-align: center;
+            padding: 0 10px;
+        }
+
+                /* @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        } */
+
+
+        .footer-section h3 {
+            color: #fce4ec;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 2px;
+            background: #f8bbd9;
+            bottom: -10px;
+            left: 20%;
+        }
+
+        .footer-section p,
+        .footer-section ul {
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 250px;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-section ul li i {
+            width: 24px;
+            color: #f8bbd9;
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: #f8bbd9;
+            font-size: 0.9rem;
+            padding-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 50px 0 25px;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-section {
+                margin-bottom: 20px;
+            }
+            .footer-section h3 {
+                margin-bottom: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer {
+                padding: 40px 0 20px;
+            }
+            .footer-section h3 {
+                font-size: 1.3rem;
+            }
+            .social-links {
+                gap: 10px;
+            }
+        }
+
+        /* Responsive Navigation */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: #e91e63;
+                flex-direction: column;
+                justify-content: start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-link {
+                padding: 0.8rem 1.2rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .menu-toggle {
+                font-size: 1.3rem;
+            }
+            
+            .nav-menu {
+                padding-top: 1.5rem;
+            }
+            
+            .nav-link {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-hand-sparkles"></i> Nail Studio
+            </a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">Quem Sou Eu</a></li>
+                    <li><a href="#services" class="nav-link">Atendimento</a></li>
+                    <li><a href="#gallery" class="nav-link">Fotos</a></li>
+                </ul>
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="hero">
+                <div class="container">
+                    <h1><i class="fas fa-gem"></i> Nail Designer Studio</h1>
+                    <p>Especialista em Alongamento de Unhas Encapsuladas e Unhas em Gel</p>
+                    <a href="#services" class="cta-button">
+                        <i class="fas fa-calendar-alt"></i> Agendar Horário
+                    </a>
+                </div>
+            </div>
+
+            <!-- Carousel -->
+            <div class="container">
+                <div class="carousel-container">
+                    <div class="carousel" id="carousel">
+                        <div class="carousel-slide">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/02a700e9-e2e4-4c1f-b4ae-7e04761f9027.png" alt="Unhas alongadas em gel com design elegante em tons rosados e dourados, decoração com strass e brilhos, acabamento glossy profissional" />
+                            <div class="carousel-caption">
+                                <h3>Alongamento em Gel</h3>
+                                <p>Unhas perfeitas e duradouras com técnicas avançadas</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/23260e0c-1dbd-4047-b711-095c019fc26c.png" alt="Unhas encapsuladas com design francesinha moderna, cores nude e branco, acabamento natural e sofisticado, formato amendoado" />
+                            <div class="carousel-caption">
+                                <h3>Unhas Encapsuladas</h3>
+                                <p>Resistência e beleza natural para o seu dia a dia</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3752a4bb-5738-49d4-96ff-2e756999e914.png" alt="Nail art artística com desenhos florais delicados, cores pastel, técnica de aquarela nas unhas, design único e personalizado" />
+                            <div class="carousel-caption">
+                                <h3>Nail Art Personalizada</h3>
+                                <p>Designs únicos criados especialmente para você</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0ea4fb13-28b2-46e8-b477-705b8a7682ca.png" alt="Ambiente do estúdio de nail design com mesa profissional, equipamentos modernos, iluminação adequada, decoração clean e feminina" />
+                            <div class="carousel-caption">
+                                <h3>Studio Profissional</h3>
+                                <p>Ambiente acolhedor e equipamentos de última geração</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-nav carousel-prev" onclick="prevSlide()">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-nav carousel-next" onclick="nextSlide()">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+
+            <!-- Services Preview -->
+            <div class="container">
+                <h2 class="section-title">Nossos Serviços</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <h3>Alongamento em Gel</h3>
+                        <p>Técnica avançada para unhas longas e resistentes com acabamento natural e duradouro.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Unhas Encapsuladas</h3>
+                        <p>Proteção e fortalecimento das unhas naturais com resultado impecável.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Nail Art</h3>
+                        <p>Desenhos personalizados e decorações únicas para expressar sua personalidade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Quem Sou Eu</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Olá, eu sou Marina!</h3>
+                        <p>Sou nail designer especializada em alongamento de unhas e técnicas avançadas em gel há mais de 5 anos. Minha paixão é criar unhas perfeitas que realcem a beleza natural de cada cliente.</p>
+                        
+                        <p>Formada em estética e com especializações em:</p>
+                        <ul style="margin: 1rem 0; padding-left: 2rem;">
+                            <li>Alongamento em unhas encapsuladas</li>
+                            <li>Técnicas avançadas em gel UV</li>
+                            <li>Nail art e decorações personalizadas</li>
+                            <li>Cuidados com cutículas e tratamentos</li>
+                        </ul>
+                        
+                        <p>Trabalho sempre com produtos de alta qualidade e em um ambiente totalmente higienizado, seguindo todos os protocolos de segurança. Cada cliente recebe um atendimento personalizado e exclusivo.</p>
+                        
+                        <a href="#services" class="cta-button">Conheça Nossos Serviços</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/753ac429-ea90-4dec-9516-5ea3e8150968.png" alt="Nail designer profissional trabalhando em unhas de cliente, ambiente clean do studio, equipamentos profissionais, mãos femininas cuidadas" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title">Atendimento</h2>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <h3>Alongamento em Gel</h3>
+                        <p>Alongamento natural com gel UV de alta qualidade. Resultado duradouro de até 3 semanas.</p>
+                        <strong style="color: #e91e63; font-size: 1.2rem;">R$ 80,00</strong>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Unhas Encapsuladas</h3>
+                        <p>Fortalecimento e proteção das unhas naturais com técnica encapsulada.</p>
+                        <strong style="color: #e91e63; font-size: 1.2rem;">R$ 70,00</strong>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h3>Nail Art Simples</h3>
+                        <p>Desenhos e decorações básicas para personalizar suas unhas.</p>
+                        <strong style="color: #e91e63; font-size: 1.2rem;">+ R$ 15,00</strong>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Nail Art Elaborada</h3>
+                        <p>Designs complexos com strass, brilhos e técnicas avançadas.</p>
+                        <strong style="color: #e91e63; font-size: 1.2rem;">+ R$ 30,00</strong>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cut"></i>
+                        </div>
+                        <h3>Manutenção</h3>
+                        <p>Retoque e cuidados para manter suas unhas sempre perfeitas.</p>
+                        <strong style="color: #e91e63; font-size: 1.2rem;">R$ 50,00</strong>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Spa das Mãos</h3>
+                        <p>Tratamento completo com hidratação, cutícula e esmaltação.</p>
+                        <strong style="color: #e91e63; font-size: 1.2rem;">R$ 45,00</strong>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Horário de Funcionamento</h3>
+                        <p>Segunda a Sábado<br>9h às 18h</p>
+                        <p>Domingos: Sob agendamento</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-whatsapp"></i>
+                        </div>
+                        <h3>Agendamento</h3>
+                        <p>WhatsApp</p>
+                        <strong>(11) 99999-9999</strong>
+                        <br><br>
+                        <a href="#" class="cta-button">Agendar Agora</a>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3>Localização</h3>
+                        <p>Rua das Flores, 123<br>Centro - São Paulo/SP</p>
+                        <p>Próximo ao metrô</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2 class="section-title">Galeria de Trabalhos</h2>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9ae6fc60-1117-44a2-8821-14b54414e140.png" alt="Unhas alongadas em gel transparente com francesa branca, formato quadrado, acabamento natural e elegante" />
+                        <div class="gallery-overlay">Francesa Clássica</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/61d6b1dd-f215-45d8-b01a-ec0b9fb05d93.png" alt="Nail art com flores delicadas pintadas à mão, cores pastel rosa e branco, unhas alongadas formato amendoado" />
+                        <div class="gallery-overlay">Floral Delicado</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ba0cb232-771f-49b6-9ffd-a5e4a7225ba1.png" alt="Unhas encapsuladas com glitter dourado, base nude, efeito ombré elegante, formato stiletto moderno" />
+                        <div class="gallery-overlay">Glitter Dourado</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/4ec44a10-d90f-4b4d-9a97-f072805b006a.png" alt="Design geométrico em unhas alongadas, cores preto e dourado, linhas precisas, estilo moderno e sofisticado" />
+                        <div class="gallery-overlay">Geométrico</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/76562f72-0540-438a-89b3-526d96edfe7c.png" alt="Unhas baby boomer com degradê suave, tons nude e rosa claro, strass aplicados, acabamento acetinado" />
+                        <div class="gallery-overlay">Baby Boomer</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6d2c84fc-59ae-4252-b75d-6549a131d14c.png" alt="Nail art artística com borboletas 3D, cores vibrantes azul e roxo, aplicação de pedrarias, design exclusivo" />
+                        <div class="gallery-overlay">Borboletas 3D</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b4df08b4-c10c-463a-8ca0-a1885203d4be.png" alt="Unhas marmorizadas com técnica aquarela, tons de verde e azul, acabamento holográfico, formato bailarina" />
+                        <div class="gallery-overlay">Marmorizado</div>
+                    </div>
+                    
+                    <div class="gallery-item">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2c470ca4-247f-4897-9fe0-0caa77f56a43.png" alt="Design minimalista com linhas finas douradas, base transparente, decoração delicada e elegante, formato oval" />
+                        <div class="gallery-overlay">Minimalista</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="#" class="cta-button">
+                        <i class="fas fa-instagram"></i> Ver Mais no Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-hand-sparkles"></i> Nail Studio</h3>
+                    <p>Especialista em alongamento de unhas encapsuladas e unhas em gel. Transformamos suas unhas em verdadeiras obras de arte com técnicas profissionais e produtos de alta qualidade.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" title="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="social-link" title="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Nossos Serviços</h3>
+                    <ul>
+                        <li><i class="fas fa-hand-paper"></i> Alongamento em Gel</li>
+                        <li><i class="fas fa-shield-alt"></i> Unhas Encapsuladas</li>
+                        <li><i class="fas fa-palette"></i> Nail Art Personalizada</li>
+                        <li><i class="fas fa-gem"></i> Decorações com Strass</li>
+                        <li><i class="fas fa-cut"></i> Manutenção</li>
+                        <li><i class="fas fa-spa"></i> Spa das Mãos</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contato & Horários</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Rua das Flores, 123 - Centro</li>
+                        <li><i class="fas fa-phone"></i> (11) 99999-9999</li>
+                        <li><i class="fas fa-envelope"></i> contato@nailstudio.com</li>
+                        <li><i class="fas fa-clock"></i> Seg-Sáb: 9h às 18h</li>
+                        <li><i class="fas fa-clock"></i> Dom: Sob agendamento</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#home" style="color: #f8bbd9; text-decoration: none;"><i class="fas fa-home"></i> Home</a></li>
+                        <li><a href="#about" style="color: #f8bbd9; text-decoration: none;"><i class="fas fa-user"></i> Quem Sou Eu</a></li>
+                        <li><a href="#services" style="color: #f8bbd9; text-decoration: none;"><i class="fas fa-concierge-bell"></i> Atendimento</a></li>
+                        <li><a href="#gallery" style="color: #f8bbd9; text-decoration: none;"><i class="fas fa-images"></i> Galeria</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nail Designer Studio. Todos os direitos reservados. | Desenvolvido com <i class="fas fa-heart" style="color: #f8bbd9;"></i></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        // Smooth scrolling for navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    // Update active nav link
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Smooth scroll to section
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const scrollPos = window.pageYOffset + 100;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+
+                if (scrollPos >= top && scrollPos < bottom) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        const carousel = document.getElementById('carousel');
+        const carouselDots = document.getElementById('carouselDots');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('span');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            carouselDots.appendChild(dot);
+        }
+
+        function updateCarousel() {
+            carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        // Auto-advance carousel
+        setInterval(nextSlide, 5000);
+
+        // Smooth scrolling for CTA buttons and footer links
+        document.querySelectorAll('a[href^="#"]').forEach(button => {
+            if (!button.classList.contains('nav-link')) {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = button.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        targetSection.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            }
+        });
+
+        // Add animation on scroll (for performance)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .gallery-item, .contact-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
